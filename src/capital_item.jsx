@@ -1,9 +1,18 @@
 import React, { Component } from "react";
-import {Row, Col, Divider} from 'antd'
+import {Row, Col, Divider} from 'antd';
+import {withRouter} from "react-router-dom";
 
 class CapitalItem extends Component {
     constructor(props) {
         super(props)
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick(e) {
+      var data = JSON.stringify(this.props.data)
+      var path = `/detail/${data}`
+      this.props.history.push(path);
+
     }
 
     render() {
@@ -26,7 +35,7 @@ class CapitalItem extends Component {
         height: "1px"
       };
       return (
-        <div style={div_style}>
+        <div style={div_style} onClick={this.handleClick}>
           <Row type="flex" align="middle">
             <Col xs={14} sm={14} lg={14}>
                   <div><p align="left" style={t_style}>{item.desc}</p></div>
@@ -42,4 +51,4 @@ class CapitalItem extends Component {
     }
 }
 
-export default CapitalItem
+export default withRouter(CapitalItem)
