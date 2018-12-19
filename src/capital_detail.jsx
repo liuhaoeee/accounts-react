@@ -3,7 +3,6 @@ import {Row, Col, Divider} from "antd";
 
 class CapitalDetail extends Component {
     render() {
-        console.log("====>" + this.props)
         const data = JSON.parse(this.props.match.params.data);
         const divider_style = {
             marginTop: "2px",

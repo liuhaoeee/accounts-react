@@ -12,7 +12,6 @@ class CapitalItem extends Component {
       var data = JSON.stringify(this.props.data)
       var path = `/detail/${data}`
       this.props.history.push(path);
-
     }
 
     render() {
