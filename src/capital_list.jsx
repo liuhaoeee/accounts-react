@@ -55,7 +55,7 @@ class CapitalList extends Component {
         return (
             data.map(item => {
                 return (
-                    <React.Fragment key={item.order}>
+                    <React.Fragment key={item.order+item.desc}>
                         <CapitalItem data={item}></CapitalItem>
                     </React.Fragment>
                 )
