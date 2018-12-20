@@ -1,35 +1,15 @@
 import React, { Component } from "react";
 import CapitalItem from "./capital_item";
 import moment from "moment"
-import axios from 'axios'
 
 class CapitalList extends Component {
     constructor(props) {
         super(props)
     }
 
-    componentDidMount() {
     
-        axios({
-            method: "get",
-            url: "/acct/transfers",
-            headers:{
-                Authorization : "Token 80252444c56b709e0d576fca2c59001e401f7dbc"
-            }
-        }).then(function (response) {
-        // Finished OK.
-        if (response.status === 200) {
-            console.log("read server side data: ", response);
-        } else {
-          console.log("read server side data error!", response);
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
-
     render() {
+        console.log("capitail_list ==> "+this.props.data)
         const data = this.props.data.map(item => {
             let new_item = {
                 amount: item.amount,

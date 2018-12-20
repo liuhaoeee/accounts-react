@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import { Route, Switch } from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import CapitalDataProvider from './capitail_data_provider'
 
-import App from "./App"
 import CapitalDetail from "./capital_detail"
 
 class Routes extends Component {
@@ -10,7 +10,7 @@ class Routes extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/app" extra={true} component={App} />
+                    <Route path="/app" extra={true} component={CapitalDataProvider} />
                     <Route path="/detail/:data" extra={true} component={CapitalDetail} />
                 </Switch>
             </Router>
