@@ -1,0 +1,11 @@
+# Caddy 服务器运行的主机、端口
+localhost:3002
+# 假定 React 开发服务器运行在 localhost:3000 端口
+proxy / http://localhost:3000
+
+proxy /sockjs-node localhost:3000 {
+  websocket
+}
+
+
+proxy /acct/transfers https://beta.xiaoxiaoqiquan.com
