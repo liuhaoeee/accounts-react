@@ -61,9 +61,10 @@ class CapitalDataProvider extends Component {
 
     render() {
         const div_style = {
-            height: "200vh",
+            height: "100vh",
             overflow: "auto"
         }
+
         return ( 
             <div>
                 <HeaderTip data={this.state.message}/>
@@ -74,9 +75,11 @@ class CapitalDataProvider extends Component {
                         hasMore={this.state.hasMoreItems}
                         loader={<div className="loader" key={0}><p align="middle">Loading ...</p></div>}
                         useWindow={false}>
-                        <CapitalList data={this.state.data}/>   
+                        
+                     <CapitalList data={this.state.data}/> 
                     </InfiniteScroll>
-                </div>
+                    </div>
+
             </div>
         );
     }
