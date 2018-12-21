@@ -6,11 +6,11 @@ class HeaderTip extends Component {
         const msg = this.props.data
 
         const div_style = {
-            height: "30px",
-            background: "rgb(240, 240, 240)"
+            height: "5vh",
+            background: "rgb(240, 240, 240)",
         }
         const p_style = {
-            lineHeight: "30px",
+            lineHeight: "5vh",
             marginLeft: "10px"
         }
         return (

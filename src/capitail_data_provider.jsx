@@ -11,17 +11,24 @@ class CapitalDataProvider extends Component {
         super(props);
         this.state = {
             data:[],
-            total: "",
+            total: 1,
             message: "",
             page: 0,
             hasMoreItems: true
         };
     }
 
+    scrollToTop = () => { // run this method to execute scrolling. 
+        window.scrollTo(0, 0)         
+    }
+    componentDidMount() {
+        this.scrollToTop();
+    }
+
     loadMore() {
         const self_component = this
-        
-        if (self_component.state.data.size >= self_component.state.total) {
+
+        if (self_component.state.data.length >= self_component.state.total) {
             self_component.setState({ hasMoreItems: false})
             return
         }
@@ -61,26 +68,26 @@ class CapitalDataProvider extends Component {
 
     render() {
         const div_style = {
-            height: "100vh",
+            height: "95vh",
             overflow: "auto"
         }
 
+        const loaderx = <div className="loader" key={0}><p align="middle">Loading ...</p></div>
+        
         return ( 
-            <div>
+            <>
                 <HeaderTip data={this.state.message}/>
                 <div style={div_style}> 
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={this.loadMore.bind(this)}
                         hasMore={this.state.hasMoreItems}
-                        loader={<div className="loader" key={0}><p align="middle">Loading ...</p></div>}
+                        loader={loaderx}
                         useWindow={false}>
-                        
-                     <CapitalList data={this.state.data}/> 
+                        <CapitalList data={this.state.data}/> 
                     </InfiniteScroll>
                     </div>
-
-            </div>
+            </>
         );
     }
 }

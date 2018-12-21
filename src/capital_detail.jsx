@@ -10,7 +10,7 @@ class CapitalDetail extends Component {
     }
     componentDidMount() {
         this.scrollToTop();
-      }
+    }
     render() {
         const data = JSON.parse(this.props.match.params.data);
         const div_style = {
