@@ -4,7 +4,7 @@ class HeaderTip extends Component {
 
     render() {
         const msg = this.props.data
-        console.log("==>"+msg)
+
         const div_style = {
             height: "30px",
             background: "rgb(240, 240, 240)"

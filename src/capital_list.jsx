@@ -9,7 +9,7 @@ class CapitalList extends Component {
 
     
     render() {
-        console.log("capitail_list ==> "+this.props.data)
+
         const data = this.props.data.map(item => {
             let new_item = {
                 amount: item.amount,
@@ -57,7 +57,7 @@ class CapitalList extends Component {
         return (
             data.map(item => {
                 return (
-                    <React.Fragment key={item.order+item.desc}>
+                    <React.Fragment key={item.order+item.desc+Math.random()}>
                         <CapitalItem data={item}></CapitalItem>
                     </React.Fragment>
                 )
