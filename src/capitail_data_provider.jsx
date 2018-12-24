@@ -8,7 +8,8 @@ import Navigation from "./navigation"
 class CapitalDataProvider extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
+        this.changeType = this.changeType.bind(this)
         this.tryRestoreComponent()
     }
 
@@ -19,6 +20,7 @@ class CapitalDataProvider extends Component {
     dataBackUp() {
         let div_offset_top = document.getElementById("list_div").scrollTop
         let data = {
+          type: this.state.type,
           data: this.state.data,
           page: this.state.page,
           total: this.state.total,
@@ -37,6 +39,7 @@ class CapitalDataProvider extends Component {
         if (data) {
             data = JSON.parse(data);
             this.state = {
+                type: data.type,
                 data: data.data,
                 page: data.page,
                 total: data.total,
@@ -47,6 +50,7 @@ class CapitalDataProvider extends Component {
             window.sessionStorage.removeItem(this.props.location.key)
         } else {
             this.state = {
+                type: "all",
                 data: [],
                 total: 1,
                 message: "",
@@ -58,12 +62,26 @@ class CapitalDataProvider extends Component {
     }
 
     scrollToTop = () => { // run this method to execute scrolling. 
-        console.log("====>"+this.state.y)
         window.scrollTo(0, 0)    
         document.getElementById("list_div").scrollTo(0, this.state.y)
     }
     componentDidMount() {
         this.scrollToTop();
+    }
+
+    changeType(type){
+        console.log("changeType=>"+type)
+
+        this.setState({
+            type: type,
+            page: 0,
+            data: [],
+            total: 1,
+            message: "",
+            hasMoreItems: true,
+            y: 0
+        })
+
     }
 
     loadMore() {
@@ -75,10 +93,11 @@ class CapitalDataProvider extends Component {
         }
 
         const next_page = self_component.state.page + 1
+        const typeurl = this.state.type === 'all' ? "" : "/"+this.state.type
 
         axios({
             method: "get",
-            url: "/acct/transfers?page="+next_page,
+            url: "/acct/transfers"+typeurl+"?page="+next_page,
             headers:{
                 Authorization : "Token 80252444c56b709e0d576fca2c59001e401f7dbc"
             }
@@ -119,7 +138,7 @@ class CapitalDataProvider extends Component {
         
         return ( 
             <>
-                <Navigation showMenu={true}/>
+                <Navigation showMenu={true} type={this.state.type} changeType={this.changeType.bind(this)}/>
                 <HeaderTip data={this.state.message}/>
                 <div style={div_style} id={div_id}> 
                     <InfiniteScroll
