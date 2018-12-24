@@ -8,7 +8,7 @@ class CapitalList extends Component {
     }
     
     render() {
-
+        const self_component = this
         const data = this.props.data.map(item => {
             let new_item = {
                 amount: item.amount,
@@ -53,13 +53,24 @@ class CapitalList extends Component {
             }
             return new_item
         })
+        const noMoreTip = self_component.props.hasMore ? "" : <div><p align="middle">没有更多了~</p></div>
         return (
-            data.map(item => {
-                return (
-                    <React.Fragment key={item.order+item.desc}>
-                        <CapitalItem data={item}></CapitalItem>
-                    </React.Fragment>
-                )
+            data.map((item, index) => {
+                if (!self_component.props.hasMore && index === data.length-1) {
+                    return (
+                        <React.Fragment key={item.order+item.desc}>
+                            <CapitalItem data={item}></CapitalItem>
+                             {noMoreTip}
+                        </React.Fragment>
+                    )
+                } else {
+                    return (
+                        <React.Fragment key={item.order+item.desc}>
+                            <CapitalItem data={item}></CapitalItem>
+                        </React.Fragment>
+                    )
+                }
+                
             })
         )
     }

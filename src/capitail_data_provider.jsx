@@ -114,7 +114,7 @@ class CapitalDataProvider extends Component {
 
         const div_id = "list_div"
 
-        const loaderx = <div className="loader" key={0}><p align="middle">Loading ...</p></div>
+        const loader = <div className="loader" key={0}><p align="middle">Loading ...</p></div>
         
         return ( 
             <>
@@ -124,9 +124,9 @@ class CapitalDataProvider extends Component {
                         pageStart={0}
                         loadMore={this.loadMore.bind(this)}
                         hasMore={this.state.hasMoreItems}
-                        loader={loaderx}
+                        loader={loader}
                         useWindow={false}>
-                        <CapitalList data={this.state.data}/> 
+                        <CapitalList data={this.state.data} hasMore={this.state.hasMoreItems}/> 
                     </InfiniteScroll>
                     </div>
             </>
