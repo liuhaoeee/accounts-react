@@ -53,6 +53,7 @@ class CapitalList extends Component {
             }
             return new_item
         })
+        
         const noMoreTip = self_component.props.hasMore ? "" : <div><p align="middle">没有更多了~</p></div>
         return (
             data.map((item, index) => {

@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
-import axios from 'axios';
+import React, {Component} from 'react'
+import axios from 'axios'
 import CapitalList from "./capital_list"
 import HeaderTip from "./header_tip"
-import InfiniteScroll from 'react-infinite-scroller';
+import InfiniteScroll from 'react-infinite-scroller'
+import Navigation from "./navigation"
 
 class CapitalDataProvider extends Component {
 
@@ -118,6 +119,7 @@ class CapitalDataProvider extends Component {
         
         return ( 
             <>
+                <Navigation showMenu={true}/>
                 <HeaderTip data={this.state.message}/>
                 <div style={div_style} id={div_id}> 
                     <InfiniteScroll

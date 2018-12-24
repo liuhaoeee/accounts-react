@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {Row, Col, Divider} from "antd";
+import Navigation from "./navigation"
 
 class CapitalDetail extends Component {
     constructor(props) {
@@ -24,6 +25,8 @@ class CapitalDetail extends Component {
             height: "1px"
         }
         return (
+            <>
+            <Navigation showMenu={false}/>
             <div style={div_style} ref={this.myRef}>
                 <Row type="flex" align="middle">
                     <Col xs={12} sm={12} lg={12}>
@@ -59,6 +62,7 @@ class CapitalDetail extends Component {
                     </Col>
                 </Row>
             </div>
+            </>
         )
     }
 }
