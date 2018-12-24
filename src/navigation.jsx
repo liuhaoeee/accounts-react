@@ -9,14 +9,16 @@ class Navigation extends Component {
         console.log(`selected ${value}`);
     }
     render() {
+        const wrap_style = {
+            overflow: "hidden",
+            background: "rgb(249,249,249)"
+        }
         const div_style = {
             marginLeft: "10px",
             marginRight: "10px",
-            marginTop: "5px"
+            marginTop: "10px"
         }
-        const wrap_style = {
-            background: "rgb(249,249,249)"
-        }
+        
         const Option = Select.Option;
         const menu = this.props.showMenu ? (
             <div style={{width: 90, overflow: "hidden", marginTop: -12, float: "right"}}>
