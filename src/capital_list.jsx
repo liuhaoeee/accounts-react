@@ -6,7 +6,6 @@ class CapitalList extends Component {
     constructor(props) {
         super(props)
     }
-
     
     render() {
 

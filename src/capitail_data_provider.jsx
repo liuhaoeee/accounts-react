@@ -4,22 +4,62 @@ import CapitalList from "./capital_list"
 import HeaderTip from "./header_tip"
 import InfiniteScroll from 'react-infinite-scroller';
 
-
 class CapitalDataProvider extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            data:[],
-            total: 1,
-            message: "",
-            page: 0,
-            hasMoreItems: true
+        this.tryRestoreComponent()
+    }
+
+    componentWillUnmount() {
+        this.dataBackUp()
+    }
+
+    dataBackUp() {
+        let div_offset_top = document.getElementById("list_div").scrollTop
+        let data = {
+          data: this.state.data,
+          page: this.state.page,
+          total: this.state.total,
+          hasMoreItems: this.state.hasMoreItems,
+          message: this.state.message,
+          y: div_offset_top
         };
+
+        window.sessionStorage.setItem(this.props.location.key, JSON.stringify(data));
+    }
+
+    tryRestoreComponent() {
+        let data = window.sessionStorage.getItem(this.props.location.key);
+
+        // 恢复之前状态
+        if (data) {
+            data = JSON.parse(data);
+            this.state = {
+                data: data.data,
+                page: data.page,
+                total: data.total,
+                hasMoreItems: data.hasMoreItems,
+                message: data.message,
+                y: data.y,
+            };
+            window.sessionStorage.removeItem(this.props.location.key)
+        } else {
+            this.state = {
+                data: [],
+                total: 1,
+                message: "",
+                page: 0,
+                hasMoreItems: true,
+                y: 0
+            };    
+        }
     }
 
     scrollToTop = () => { // run this method to execute scrolling. 
-        window.scrollTo(0, 0)         
+        console.log("====>"+this.state.y)
+        window.scrollTo(0, 0)    
+        document.getElementById("list_div").scrollTo(0, this.state.y)
     }
     componentDidMount() {
         this.scrollToTop();
@@ -72,12 +112,14 @@ class CapitalDataProvider extends Component {
             overflow: "auto"
         }
 
+        const div_id = "list_div"
+
         const loaderx = <div className="loader" key={0}><p align="middle">Loading ...</p></div>
         
         return ( 
             <>
                 <HeaderTip data={this.state.message}/>
-                <div style={div_style}> 
+                <div style={div_style} id={div_id}> 
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={this.loadMore.bind(this)}
