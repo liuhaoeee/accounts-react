@@ -1,32 +1,55 @@
 import React, {Component} from "react"
 import {Row, Col, Select} from "antd"
 import {withRouter} from "react-router-dom";
-import { Picker, List, WhiteSpace } from 'antd-mobile';
-// import 'antd-mobile/dist/antd-mobile.css'
+import { Picker, List } from 'antd-mobile';
+
+// 如果不是使用 List.Item 作为 children
+const CustomChildren = props => (
+    <div
+      onClick={props.onClick}
+      style={{ width: '90px', float: 'right', borderRadius: 5}}
+    >
+      <div>
+        <div style={{ color: '#888'}}><p align="middle" style={{float: 'left', width: '80%'}}>{props.extra}</p><span style={{float: 'right'}} className="arrow-down"/></div>
+      </div>
+    </div>
+  );
 
 const seasons = [{
-    "value": "341522",
-    "label": "霍邱县",
+    "value": "all",
+    "label": "全部",
     "children": []
 }, {
-    "value": "341525",
-    "label": "霍山县",
+    "value": "recharge",
+    "label": "充值",
     "children": []
 }, {
-    "value": "341502",
-    "label": "金安区",
+    "value": "withdraw",
+    "label": "提现",
     "children": []
 },{
-    "value": "341522",
-    "label": "霍邱县",
+    "value": "gain",
+    "label": "收益",
     "children": []
 }, {
-    "value": "341525",
-    "label": "霍山县",
+    "value": "buy",
+    "label": "支出",
     "children": []
 }, {
-    "value": "341502",
-    "label": "金安区",
+    "value": "followed",
+    "label": "跟投",
+    "children": []
+}, {
+    "value": "follower",
+    "label": "领投",
+    "children": []
+}, {
+    "value": "buy_fee",
+    "label": "服务费",
+    "children": []
+},{
+    "value": "early_return",
+    "label": "提前返还",
     "children": []
 }]
 
@@ -36,8 +59,6 @@ class Navigation extends Component {
         super(props)
         this.handleClick = this.handleClick.bind(this)
     }
-
-    
 
     handleChange(value) {
         console.log(`selected ${value}`);
@@ -88,7 +109,7 @@ class Navigation extends Component {
         return(
             <div style={wrap_style}>
                 <div style={div_style}>
-                <Row type="flex" align="middle">
+                <Row type="flex" align="top">
                     <Col xs={8} sm={8} lg={8}>
                         <p align="left" onClick={this.handleClick}><span className='arrow-left'/>返回</p>
                     </Col>
@@ -96,10 +117,11 @@ class Navigation extends Component {
                         <p align="middle"><strong>资金明细</strong></p>
                     </Col>
                     <Col xs={8} sm={8} lg={8}>
-                    <Picker data={seasons} cols={1} className="forss">
-                        <List.Item arrow="up">Single</List.Item>
-                    </Picker>
-                        {/* {menu} */}
+                        <div >
+                            <Picker data={seasons} cols={1} title={"资金类型"} value="all" extra={"全部"}>
+                                <CustomChildren/>
+                            </Picker>
+                        </div>
                     </Col>
                 </Row>
             </div>
