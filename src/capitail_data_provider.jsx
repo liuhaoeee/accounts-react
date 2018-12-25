@@ -128,7 +128,7 @@ class CapitalDataProvider extends Component {
 
     render() {
         const div_style = {
-            height: "87vh",
+            height: "88vh",
             overflow: "auto"
         }
 

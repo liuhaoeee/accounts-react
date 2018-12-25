@@ -1,72 +1,68 @@
 import React, {Component} from "react"
 import {Row, Col, Select} from "antd"
 import {withRouter} from "react-router-dom";
-import { Picker, List } from 'antd-mobile';
+import { Picker } from 'antd-mobile';
 
 // 如果不是使用 List.Item 作为 children
 const CustomChildren = props => (
     <div
       onClick={props.onClick}
-      style={{ width: '90px', float: 'right', borderRadius: 5}}
+      style={{ width: '90px', float: 'right'}}
     >
       <div>
-        <div style={{ color: '#888'}}><p align="middle" style={{float: 'left', width: '80%'}}>{props.extra}</p><span style={{float: 'right'}} className="arrow-down"/></div>
+        <div style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{props.children}</div>
+        <div style={{ color: '#888'}}><p align="middle" style={{float: 'left', width: '80%'}}><strong>{props.extra}</strong></p><span style={{float: 'right'}} className="arrow-down"/></div>
       </div>
     </div>
   );
 
 const seasons = [{
-    "value": "all",
-    "label": "全部",
-    "children": []
+    value: 0,
+    label: "全部",
 }, {
-    "value": "recharge",
-    "label": "充值",
-    "children": []
+    value: 1,
+    label: "充值",
 }, {
-    "value": "withdraw",
-    "label": "提现",
-    "children": []
+    value: 2,
+    label: "提现",
 },{
-    "value": "gain",
-    "label": "收益",
-    "children": []
+    value: 3,
+    label: "收益",
 }, {
-    "value": "buy",
-    "label": "支出",
-    "children": []
+    value: 4,
+    label: "支出",
 }, {
-    "value": "followed",
-    "label": "跟投",
-    "children": []
+    value: 5,
+    label: "跟投",
 }, {
-    "value": "follower",
-    "label": "领投",
-    "children": []
+    value: 6,
+    label: "领投",
 }, {
-    "value": "buy_fee",
-    "label": "服务费",
-    "children": []
+    value: 7,
+    label: "服务费",
 },{
-    "value": "early_return",
-    "label": "提前返还",
-    "children": []
+    value: 8,
+    label: "提前返还",
 }]
 
+const v2label = {0: "全部", 1: "充值", 2: "提现", 3: "收益", 4: "支出", 5: "跟投", 6: "领投", 7: "服务费", 8: "提前返还"}
+const type2v = {"all": 0, "recharge": 1, "withdraw": 2, "gain": 3, "buy": 4, "followed": 5, "follower": 6, "buy_fee": 7, "early_return": 8}
+const v2type = {0: "all", 1: "recharge", 2: "withdraw", 3: "gain", 4: "buy", 5: "followed", 6: "follower", 7: "buy_fee", 8: "early_return"}
 
 class Navigation extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            value: this.props.type ? type2v[this.props.type] : 0
+        }
         this.handleClick = this.handleClick.bind(this)
     }
 
     handleChange(value) {
-        console.log(`selected ${value}`);
-        this.setState({
-            type: value
-        })
+        console.log("change type=>"+value)
         this.props.changeType(value)
     }
+
     handleClick(e) {
         const cur_url = this.props.location.pathname
         if (cur_url.indexOf('/app')===0) {
@@ -76,7 +72,7 @@ class Navigation extends Component {
         }
     }
     render() {
-        console.log("navigation height:" + this.props.height)
+
         const wrap_style = {
             overflow: "hidden",
             height: this.props.height ? this.props.height : "",
@@ -90,22 +86,8 @@ class Navigation extends Component {
         
         const Option = Select.Option;
 
-        const defaultType = this.props.type ? this.props.type : "all"
-        const menu = this.props.showMenu ? (
-            <div style={{width: 90, overflow: "hidden", marginTop: -12, float: "right"}}>
-            <Select defaultValue={defaultType} style={{ width: 100, margin: -6}} onChange={this.handleChange.bind(this)}>
-            <Option value="all">全部</Option>
-            <Option value="recharge">充值</Option>
-            <Option value="withdraw">提现</Option>
-            <Option value="gain">收益</Option>
-            <Option value="buy">支出</Option>
-            <Option value="followed">跟投</Option>
-            <Option value="follower">领投</Option>
-            <Option value="buy_fee">服务费</Option>
-            <Option value="early_return">提前返还</Option>
-            </Select>  
-            </div>                              
-          ) : ""
+        const defaultType = this.props.type ? type2v[this.props.type] : "all"
+        
         return(
             <div style={wrap_style}>
                 <div style={div_style}>
@@ -117,8 +99,11 @@ class Navigation extends Component {
                         <p align="middle"><strong>资金明细</strong></p>
                     </Col>
                     <Col xs={8} sm={8} lg={8}>
-                        <div >
-                            <Picker data={seasons} cols={1} title={"资金类型"} value="all" extra={"全部"}>
+                        <div>
+                            <Picker data={seasons} cols={1} title={"资金类型"} value={this.state.value} extra={v2label[this.state.value]}
+                                // onOk={v => {console.log("onOK=>"+v);this.setState({ type: v })}}
+                                onChange={v => {console.log("onOK=>"+v+" "+v2type[v]);this.handleChange(v2type[v]);this.setState({ value: v })}}
+                            >
                                 <CustomChildren/>
                             </Picker>
                         </div>
