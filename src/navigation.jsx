@@ -1,6 +1,35 @@
 import React, {Component} from "react"
 import {Row, Col, Select} from "antd"
 import {withRouter} from "react-router-dom";
+import { Picker, List, WhiteSpace } from 'antd-mobile';
+// import 'antd-mobile/dist/antd-mobile.css'
+
+const seasons = [{
+    "value": "341522",
+    "label": "霍邱县",
+    "children": []
+}, {
+    "value": "341525",
+    "label": "霍山县",
+    "children": []
+}, {
+    "value": "341502",
+    "label": "金安区",
+    "children": []
+},{
+    "value": "341522",
+    "label": "霍邱县",
+    "children": []
+}, {
+    "value": "341525",
+    "label": "霍山县",
+    "children": []
+}, {
+    "value": "341502",
+    "label": "金安区",
+    "children": []
+}]
+
 
 class Navigation extends Component {
     constructor(props) {
@@ -26,8 +55,10 @@ class Navigation extends Component {
         }
     }
     render() {
+        console.log("navigation height:" + this.props.height)
         const wrap_style = {
             overflow: "hidden",
+            height: this.props.height ? this.props.height : "",
             background: "rgb(249,249,249)"
         }
         const div_style = {
@@ -65,7 +96,10 @@ class Navigation extends Component {
                         <p align="middle"><strong>资金明细</strong></p>
                     </Col>
                     <Col xs={8} sm={8} lg={8}>
-                        {menu}
+                    <Picker data={seasons} cols={1} className="forss">
+                        <List.Item arrow="up">Single</List.Item>
+                    </Picker>
+                        {/* {menu} */}
                     </Col>
                 </Row>
             </div>

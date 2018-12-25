@@ -128,7 +128,7 @@ class CapitalDataProvider extends Component {
 
     render() {
         const div_style = {
-            height: "95vh",
+            height: "87vh",
             overflow: "auto"
         }
 
@@ -138,8 +138,8 @@ class CapitalDataProvider extends Component {
         
         return ( 
             <>
-                <Navigation showMenu={true} type={this.state.type} changeType={this.changeType.bind(this)}/>
-                <HeaderTip data={this.state.message}/>
+                <Navigation height={"7vh"} showMenu={true} type={this.state.type} changeType={this.changeType.bind(this)}/>
+                <HeaderTip height={"5vh"} data={this.state.message}/>
                 <div style={div_style} id={div_id}> 
                     <InfiniteScroll
                         pageStart={0}
@@ -149,7 +149,7 @@ class CapitalDataProvider extends Component {
                         useWindow={false}>
                         <CapitalList data={this.state.data} hasMore={this.state.hasMoreItems}/> 
                     </InfiniteScroll>
-                    </div>
+                </div>
             </>
         );
     }

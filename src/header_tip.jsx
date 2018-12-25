@@ -6,7 +6,7 @@ class HeaderTip extends Component {
         const msg = this.props.data
 
         const div_style = {
-            height: "5vh",
+            height: this.props.height ? this.props.height : "5vh",
             background: "rgb(240, 240, 240)",
         }
         const p_style = {
