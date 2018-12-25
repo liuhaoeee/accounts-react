@@ -1,5 +1,5 @@
 import React, {Component} from "react"
-import {Row, Col, Select} from "antd"
+import {Row, Col} from "antd"
 import {withRouter} from "react-router-dom";
 import { Picker } from 'antd-mobile';
 
@@ -10,13 +10,12 @@ const CustomChildren = props => (
       style={{ width: '90px', float: 'right'}}
     >
       <div>
-        <div style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{props.children}</div>
-        <div style={{ color: '#888'}}><p align="middle" style={{float: 'left', width: '80%'}}><strong>{props.extra}</strong></p><span style={{float: 'right'}} className="arrow-down"/></div>
+        <div><p align="middle" style={{float: 'left', width: '80%'}}><strong>{props.extra}</strong></p><span style={{float: 'right'}} className="arrow-down"/></div>
       </div>
     </div>
   );
 
-const seasons = [{
+const vms = [{
     value: 0,
     label: "全部",
 }, {
@@ -86,7 +85,7 @@ class Navigation extends Component {
         
         const picker = this.props.showMenu ? (
             <div>
-                <Picker data={seasons} cols={1} title={"资金类型"} value={this.state.value} extra={v2label[this.state.value]}
+                <Picker data={vms} cols={1} title={"资金类型"} value={this.state.value} extra={v2label[this.state.value]}
                     // onOk={v => {console.log("onOK=>"+v);this.setState({ type: v })}}
                     onChange={v => {console.log("onOK=>"+v+" "+v2type[v]);this.handleChange(v2type[v]);this.setState({ value: v })}}
                 >
