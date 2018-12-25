@@ -84,10 +84,17 @@ class Navigation extends Component {
             marginTop: "10px"
         }
         
-        const Option = Select.Option;
+        const picker = this.props.showMenu ? (
+            <div>
+                <Picker data={seasons} cols={1} title={"资金类型"} value={this.state.value} extra={v2label[this.state.value]}
+                    // onOk={v => {console.log("onOK=>"+v);this.setState({ type: v })}}
+                    onChange={v => {console.log("onOK=>"+v+" "+v2type[v]);this.handleChange(v2type[v]);this.setState({ value: v })}}
+                >
+                    <CustomChildren/>
+                </Picker>
+            </div>
+        ) : ""
 
-        const defaultType = this.props.type ? type2v[this.props.type] : "all"
-        
         return(
             <div style={wrap_style}>
                 <div style={div_style}>
@@ -99,14 +106,7 @@ class Navigation extends Component {
                         <p align="middle"><strong>资金明细</strong></p>
                     </Col>
                     <Col xs={8} sm={8} lg={8}>
-                        <div>
-                            <Picker data={seasons} cols={1} title={"资金类型"} value={this.state.value} extra={v2label[this.state.value]}
-                                // onOk={v => {console.log("onOK=>"+v);this.setState({ type: v })}}
-                                onChange={v => {console.log("onOK=>"+v+" "+v2type[v]);this.handleChange(v2type[v]);this.setState({ value: v })}}
-                            >
-                                <CustomChildren/>
-                            </Picker>
-                        </div>
+                        {picker}
                     </Col>
                 </Row>
             </div>
