@@ -4,7 +4,7 @@ import {withRouter} from "react-router-dom";
 import { Picker } from 'antd-mobile';
 
 // 如果不是使用 List.Item 作为 children
-const CustomChildren = props => (
+const CustomPickerButton = props => (
     <div
       onClick={props.onClick}
       style={{ width: '90px', float: 'right'}}
@@ -89,7 +89,7 @@ class Navigation extends Component {
                     // onOk={v => {console.log("onOK=>"+v);this.setState({ type: v })}}
                     onChange={v => {console.log("onOK=>"+v+" "+v2type[v]);this.handleChange(v2type[v]);this.setState({ value: v })}}
                 >
-                    <CustomChildren/>
+                    <CustomPickerButton/>
                 </Picker>
             </div>
         ) : ""
