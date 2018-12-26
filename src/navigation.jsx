@@ -58,13 +58,13 @@ class Navigation extends Component {
     }
 
     handleChange(value) {
-        console.log("change type=>"+value)
         this.props.changeType(value)
     }
 
     handleClick(e) {
-        const cur_url = this.props.location.pathname
-        if (cur_url.indexOf('/app')===0) {
+        const path_name = this.props.location.pathname
+        console.log("pathname-"+path_name+" " +this.props.location.search )
+        if (path_name === '/accounts') {
             window.location.href = "microoption://h5/exit"
         } else {
             this.props.history.goBack()
