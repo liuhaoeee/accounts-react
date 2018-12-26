@@ -97,7 +97,7 @@ class CapitalDataProvider extends Component {
 
         axios({
             method: "get",
-            url: "/acct/transfers"+typeurl+"?page="+next_page,
+            url: "https://beta.xiaoxiaoqiquan.com/acct/transfers"+typeurl+"?page="+next_page,
             headers:{
                 Authorization : "Token 80252444c56b709e0d576fca2c59001e401f7dbc"
             }

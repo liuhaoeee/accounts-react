@@ -10,8 +10,8 @@ class Routes extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route path="/app" extra={true} component={CapitalDataProvider} />
-                    <Route path="/detail/:data" extra={true} component={CapitalDetail} />
+                    <Route exact path="/"  component={CapitalDataProvider} />
+                    <Route exact path="/detail/:data" component={CapitalDetail} />
                 </Switch>
             </Router>
         )
