@@ -63,7 +63,7 @@ class CapitalDataProvider extends Component {
 
     scrollToTop = () => { // run this method to execute scrolling. 
         window.scrollTo(0, 0)    
-        document.getElementById("list_div").scrollTo(0, this.state.y)
+        document.getElementById("list_div").scrollTop = this.state.y
     }
     componentDidMount() {
         this.scrollToTop();
