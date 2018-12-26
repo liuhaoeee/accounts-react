@@ -32,5 +32,7 @@
   ],
   "devDependencies": {
     "@types/react-native": "^0.57.18"
-  }
+  },
+  // 部署时需要将build目录mv到目标目录下改名为accounts
+  "homepage": "/accounts"
 }

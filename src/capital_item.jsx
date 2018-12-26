@@ -10,7 +10,7 @@ class CapitalItem extends Component {
 
     handleClick(e) {
       var data = JSON.stringify(this.props.data)
-      var path = `/detail/${data}`
+      var path = `/accounts/detail/${data}`
       this.props.history.push(path)
     }
 
